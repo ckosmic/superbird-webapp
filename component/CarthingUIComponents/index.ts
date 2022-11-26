@@ -63,6 +63,9 @@ export { default as IconPlaybackSpeed1point2x } from "./Icons/IconPlaybackSpeed1
 export { default as IconPlaybackSpeed1point5x } from "./Icons/IconPlaybackSpeed1point5x";
 export { default as IconPublic } from "./Icons/IconPublic";
 export { default as IconOtherVoice } from "./Icons/IconOtherVoice";
+export { default as IconRepeat48 } from "mods/RepeatButton/Icons/IconRepeat48";
+export { default as IconRepeatActive48 } from "mods/RepeatButton/Icons/IconRepeatActive48";
+export { default as IconRepeatOneActive48 } from "mods/RepeatButton/Icons/IconRepeatOneActive48";
 export type {default as Equalizer, Props as EqualizerProps, EqAnimation} from "./Equaliser/Equaliser";
 export type {default as NowPlaying, Props as NowPlayingProps} from "./NowPlaying/NowPlaying";
 export type {default as Banner, Props as BannerProps, ColorStyle} from "./Banner/Banner";

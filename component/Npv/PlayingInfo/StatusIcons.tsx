@@ -9,7 +9,9 @@ import { observer } from 'mobx-react-lite';
 import styles from './StatusIcons.module.scss';
 
 const StatusIcons = () => {
-  const uiState = useStore().npvStore.playingInfoUiState;
+  const rootStore = useStore();
+  const uiState = rootStore.npvStore.playingInfoUiState;
+  const modsController = rootStore.modsController;
 
   return (
     <div className={styles.statusIcons}>
@@ -18,12 +20,12 @@ const StatusIcons = () => {
           <IconWind32 />
         </div>
       )}
-      {uiState.isPlayingSpotify && uiState.onRepeat && (
+      {uiState.isPlayingSpotify && uiState.onRepeat && !modsController.repeatButtonEnabled && (
         <div data-testid="repeat-icon">
           <IconRepeat32 />
         </div>
       )}
-      {uiState.isPlayingSpotify && uiState.onRepeatOnce && (
+      {uiState.isPlayingSpotify && uiState.onRepeatOnce && !modsController.repeatButtonEnabled && (
         <div data-testid="repeat-icon-once">
           <IconRepeatOne32 />
         </div>

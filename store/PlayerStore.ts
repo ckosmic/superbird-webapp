@@ -312,6 +312,14 @@ class PlayerStore {
     return false;
   }
 
+  get canToggleRepeat(): boolean {
+    if (!!this.state.playback_restrictions?.can_repeat_context || 
+      !!this.state.playback_restrictions?.can_repeat_track) {
+      return this.currentTrack.uri !== '';
+    }
+    return false;
+  }
+
   get canSkipNext(): boolean {
     if (this.isPlayingAd) {
       return false;
@@ -479,6 +487,27 @@ class PlayerStore {
     }
   };
 
+  repeat = () => {
+    this.setRepeat(2);
+    this.interappActions.setRepeat('CONTEXT').catch(() => {
+      this.setRepeat(0);
+    });
+  };
+
+  repeatOnce = () => {
+    this.setRepeat(1);
+    this.interappActions.setRepeat('TRACK').catch(() => {
+      this.setRepeat(2);
+    });
+  };
+
+  unrepeat = () => {
+    this.setRepeat(0);
+    this.interappActions.setRepeat('NONE').catch(() => {
+      this.setRepeat(1);
+    });
+  };
+
   seek(position: number) {
     if (this.canSeek && this.currently_seeking === undefined) {
       if (this.useSuperbirdEndpoints) {
@@ -589,6 +618,10 @@ class PlayerStore {
 
   setShuffle(shuffleState: boolean) {
     this.state.playback_options.shuffle = shuffleState;
+  }
+
+  setRepeat(repeatState: 0 | 1 | 2) {
+    this.state.playback_options.repeat = repeatState;
   }
 
   setContextUri(contextUri: string) {

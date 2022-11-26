@@ -105,6 +105,11 @@ export default class ControlButtonsUiState {
     return this.playerStore.shuffled;
   }
 
+  get repeatState() {
+    return this.playerStore.onRepeat ? 1 :
+      this.playerStore.onRepeatOnce ? 2 : 0; 
+  }
+
   get showPodcastControls() {
     return (
       this.playerStore.isPodcast ||
@@ -224,6 +229,18 @@ export default class ControlButtonsUiState {
 
   handleUnshuffleClick = () => {
     this.playerStore.unshuffle();
+  };
+
+  handleRepeatClick = () => {
+    this.playerStore.repeat();
+  };
+
+  handleRepeatOnceClick = () => {
+    this.playerStore.repeatOnce();
+  };
+
+  handleUnrepeatClick = () => {
+    this.playerStore.unrepeat();
   };
 
   handleSeekBackClick = () => {

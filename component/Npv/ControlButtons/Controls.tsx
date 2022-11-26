@@ -10,6 +10,7 @@ import SaveEpisode from './SaveEpisode';
 import Shuffle from './Shuffle';
 import Seek from './Seek';
 import Block from './Block';
+import Repeat from 'mods/RepeatButton/components/Repeat';
 import classnames from 'classnames';
 import { ControlButtonSet } from 'component/Npv/ControlButtons/ControlButtonsUiState';
 import { ReactNode } from 'react';
@@ -32,6 +33,9 @@ export enum NpvIcon {
   VOICE_ON = 'voice-on',
   VOICE_OFF = 'voice-off',
   BLOCK = 'block',
+  REPEAT = 'repeat',
+  REPEAT_ONCE = 'repeat_once',
+  UNREPEAT = 'unrepeat',
 }
 
 export enum SkipDirection {
@@ -40,7 +44,9 @@ export enum SkipDirection {
 }
 
 const Controls = () => {
-  const uiState = useStore().npvStore.controlButtonsUiState;
+  const rootStore = useStore();
+  const uiState = rootStore.npvStore.controlButtonsUiState;
+  const modsController = rootStore.modsController;
 
   const setToComp: Record<ControlButtonSet, ReactNode> = {
     ['music']: (
@@ -49,6 +55,7 @@ const Controls = () => {
         <PreviousOrNext direction={SkipDirection.BACK} />
         <PlayPause />
         <PreviousOrNext direction={SkipDirection.FORWARD} />
+        {modsController.repeatButtonEnabled ? <Repeat /> : null}
         <LikeTrack />
       </>
     ),
