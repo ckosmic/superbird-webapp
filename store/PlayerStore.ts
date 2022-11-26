@@ -460,6 +460,27 @@ class PlayerStore {
     }
   };
 
+  repeat = () => {
+    this.setRepeat(2);
+    this.interappActions.setRepeat('CONTEXT').catch(() => {
+      this.setRepeat(0);
+    });
+  };
+
+  repeatOnce = () => {
+    this.setRepeat(1);
+    this.interappActions.setRepeat('TRACK').catch(() => {
+      this.setRepeat(2);
+    });
+  };
+
+  unrepeat = () => {
+    this.setRepeat(0);
+    this.interappActions.setRepeat('NONE').catch(() => {
+      this.setRepeat(1);
+    });
+  };
+
   unshuffle = () => {
     if (this.canToggleShuffle) {
       this.setShuffle(false);
@@ -586,6 +607,10 @@ class PlayerStore {
 
   setShuffle(shuffleState: boolean) {
     this.state.playback_options.shuffle = shuffleState;
+  }
+
+  setRepeat(repeatState: 0 | 1 | 2) {
+    this.state.playback_options.repeat = repeatState;
   }
 
   setContextUri(contextUri: string) {

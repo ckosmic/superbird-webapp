@@ -13,6 +13,7 @@ import Block from './Block';
 import classnames from 'classnames';
 import { ControlButtonSet } from 'component/Npv/ControlButtons/ControlButtonsUiState';
 import { ReactNode } from 'react';
+import Repeat from './Repeat';
 
 export enum NpvIcon {
   UNLIKE = 'unlike',
@@ -32,6 +33,9 @@ export enum NpvIcon {
   VOICE_ON = 'voice-on',
   VOICE_OFF = 'voice-off',
   BLOCK = 'block',
+  REPEAT = 'repeat',
+  REPEAT_ONCE = 'repeat_once',
+  UNREPEAT = 'unrepeat',
 }
 
 export enum SkipDirection {
@@ -49,6 +53,7 @@ const Controls = () => {
         <PreviousOrNext direction={SkipDirection.BACK} />
         <PlayPause />
         <PreviousOrNext direction={SkipDirection.FORWARD} />
+        <Repeat />
         <LikeTrack />
       </>
     ),

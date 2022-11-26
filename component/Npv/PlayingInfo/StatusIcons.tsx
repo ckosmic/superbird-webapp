@@ -18,16 +18,16 @@ const StatusIcons = () => {
           <IconWind32 />
         </div>
       )}
-      {uiState.isPlayingSpotify && uiState.onRepeat && (
+      {/*uiState.isPlayingSpotify && uiState.onRepeat && (
         <div data-testid="repeat-icon">
           <IconRepeat32 />
         </div>
-      )}
-      {uiState.isPlayingSpotify && uiState.onRepeatOnce && (
+      )*/}
+      {/*uiState.isPlayingSpotify && uiState.onRepeatOnce && (
         <div data-testid="repeat-icon-once">
           <IconRepeatOne32 />
         </div>
-      )}
+      )*/}
       {uiState.isMicMuted && (
         <div data-testid="muted-icon" onClick={uiState.showSettings}>
           <IconMute32 />

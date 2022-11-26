@@ -46,7 +46,7 @@ const Npv = () => {
         {playerStore.isPlayingSpotify && <Scrubbing />}
         <div className={styles.controlsContainer}>
           <CSSTransition
-            in={!npvStore.volumeUiState.shouldShowVolume}
+            in={/*!npvStore.volumeUiState.shouldShowVolume*/ true}
             timeout={transitionDurationMs}
             classNames={transitionStyles}
             unmountOnExit
@@ -54,7 +54,7 @@ const Npv = () => {
             <Controls />
           </CSSTransition>
           <CSSTransition
-            in={npvStore.volumeUiState.shouldShowVolume}
+            in={/*npvStore.volumeUiState.shouldShowVolume*/ false}
             timeout={transitionDurationMs}
             classNames={transitionStyles}
             unmountOnExit
