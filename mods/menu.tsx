@@ -9,6 +9,7 @@ export enum ModsMenuItemId {
   SHOW_DEVELOPER_OPTIONS = "show_developer_options",
   DINO = "dino",
   REPEAT_BUTTON = "repeat_button",
+  RAINBOW_PROGRESS = "rainbow_progress",
 }
 
 // use get function to avoid issues resulting from circular dependency
@@ -46,6 +47,13 @@ export const getModsView = (): View => ({
       index: 0,
       visible: () => true,
       type: "toggle"
+    },
+    {
+      id: ModsMenuItemId.RAINBOW_PROGRESS,
+      label: "Rainbow progress",
+      index: 0,
+      visible: () => true,
+      type: "toggle"
     }
   ]
 });
@@ -58,6 +66,8 @@ export const isToggleOnHook = (item: View): boolean => {
       return rootStore.modsController.showDeveloperOptionsEnabled;
     case ModsMenuItemId.REPEAT_BUTTON:
       return rootStore.modsController.repeatButtonEnabled;
+    case ModsMenuItemId.RAINBOW_PROGRESS:
+      return rootStore.modsController.rainbowProgressEnabled;
     default:
       return false;
   }
@@ -106,6 +116,9 @@ export const handleSubmenuItemSelectedHook = (item: View): boolean => {
     case ModsMenuItemId.REPEAT_BUTTON:
       rootStore.modsController.toggleRepeatButtonEnabled();
       return true;
+    case ModsMenuItemId.RAINBOW_PROGRESS:
+      rootStore.modsController.toggleRainbowProgressEnabled();
+      return true;
     default:
       return false;
   }
@@ -115,6 +128,7 @@ export const handleSubmenuItemSelectedHook = (item: View): boolean => {
 const MODS_MUTE_ADS_ENABLED_KEY = 'mods_mute_ads_enabled';
 const MODS_SHOW_DEVELOPER_OPTIONS_ENABLED_KEY = 'mods_show_developer_options_enabled';
 const MODS_REPEAT_BUTTON_ENABLED_KEY = 'mods_repeat_button_enabled';
+const MODS_RAINBOW_PROGRESS_ENABLED_KEY = 'mods_rainbow_progress_enabled';
 
 export class ModsController {
   private persistentStorage: SeedableStorageInterface;
@@ -152,6 +166,14 @@ export class ModsController {
     );
   }
 
+  get rainbowProgressEnabled(): boolean {
+    return Boolean(
+      JSON.parse(
+        this.persistentStorage.getItem(MODS_RAINBOW_PROGRESS_ENABLED_KEY) ?? 'true',
+      )
+    );
+  }
+
   toggleMuteAdsEnabled(): void {
     this.persistentStorage.setItem(
       MODS_MUTE_ADS_ENABLED_KEY,
@@ -170,6 +192,13 @@ export class ModsController {
     this.persistentStorage.setItem(
       MODS_REPEAT_BUTTON_ENABLED_KEY,
       JSON.stringify(!this.repeatButtonEnabled),
+    );
+  }
+
+  toggleRainbowProgressEnabled(): void {
+    this.persistentStorage.setItem(
+      MODS_RAINBOW_PROGRESS_ENABLED_KEY,
+      JSON.stringify(!this.rainbowProgressEnabled),
     );
   }
 }

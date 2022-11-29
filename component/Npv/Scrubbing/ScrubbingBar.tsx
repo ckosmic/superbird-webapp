@@ -3,7 +3,9 @@ import { observer } from 'mobx-react-lite';
 import styles from './ScrubbingBar.module.scss';
 
 const ScrubbingBar = () => {
-  const uiState = useStore().npvStore.scrubbingUiState;
+  const rootStore = useStore();
+  const uiState = rootStore.npvStore.scrubbingUiState;
+  const modsController = rootStore.modsController;
   const { colorChannels } = uiState;
 
   return (
@@ -15,7 +17,7 @@ const ScrubbingBar = () => {
       data-testid="scrubbing-bar"
     >
       <div
-        className={styles.progressPlayed}
+        className={`${styles.progressPlayed} ${modsController.rainbowProgressEnabled ? styles.rainbow : ''}`}
         style={{
           transform: `scaleX(${uiState.trackPlayedPercent * 8})`,
         }}
