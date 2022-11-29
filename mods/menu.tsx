@@ -10,6 +10,7 @@ export enum ModsMenuItemId {
   DINO = "dino",
   REPEAT_BUTTON = "repeat_button",
   RAINBOW_PROGRESS = "rainbow_progress",
+  TIMESTAMPS = "timestamps",
 }
 
 // use get function to avoid issues resulting from circular dependency
@@ -54,6 +55,13 @@ export const getModsView = (): View => ({
       index: 0,
       visible: () => true,
       type: "toggle"
+    },
+    {
+      id: ModsMenuItemId.TIMESTAMPS,
+      label: "Timestamps",
+      index: 0,
+      visible: () => true,
+      type: "toggle"
     }
   ]
 });
@@ -68,6 +76,8 @@ export const isToggleOnHook = (item: View): boolean => {
       return rootStore.modsController.repeatButtonEnabled;
     case ModsMenuItemId.RAINBOW_PROGRESS:
       return rootStore.modsController.rainbowProgressEnabled;
+    case ModsMenuItemId.TIMESTAMPS:
+      return rootStore.modsController.timestampsEnabled;
     default:
       return false;
   }
@@ -119,6 +129,9 @@ export const handleSubmenuItemSelectedHook = (item: View): boolean => {
     case ModsMenuItemId.RAINBOW_PROGRESS:
       rootStore.modsController.toggleRainbowProgressEnabled();
       return true;
+    case ModsMenuItemId.TIMESTAMPS:
+      rootStore.modsController.toggleTimestampsEnabled();
+      return true;
     default:
       return false;
   }
@@ -129,6 +142,7 @@ const MODS_MUTE_ADS_ENABLED_KEY = 'mods_mute_ads_enabled';
 const MODS_SHOW_DEVELOPER_OPTIONS_ENABLED_KEY = 'mods_show_developer_options_enabled';
 const MODS_REPEAT_BUTTON_ENABLED_KEY = 'mods_repeat_button_enabled';
 const MODS_RAINBOW_PROGRESS_ENABLED_KEY = 'mods_rainbow_progress_enabled';
+const MODS_TIMESTAMPS_ENABLED_KEY = 'mods_timestamps_enabled';
 
 export class ModsController {
   private persistentStorage: SeedableStorageInterface;
@@ -174,6 +188,14 @@ export class ModsController {
     );
   }
 
+  get timestampsEnabled(): boolean {
+    return Boolean(
+      JSON.parse(
+        this.persistentStorage.getItem(MODS_TIMESTAMPS_ENABLED_KEY) ?? 'true',
+      )
+    );
+  }
+
   toggleMuteAdsEnabled(): void {
     this.persistentStorage.setItem(
       MODS_MUTE_ADS_ENABLED_KEY,
@@ -199,6 +221,13 @@ export class ModsController {
     this.persistentStorage.setItem(
       MODS_RAINBOW_PROGRESS_ENABLED_KEY,
       JSON.stringify(!this.rainbowProgressEnabled),
+    );
+  }
+
+  toggleTimestampsEnabled(): void {
+    this.persistentStorage.setItem(
+      MODS_TIMESTAMPS_ENABLED_KEY,
+      JSON.stringify(!this.timestampsEnabled),
     );
   }
 }

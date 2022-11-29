@@ -9,6 +9,15 @@ const ScrubbingBar = () => {
   const { colorChannels } = uiState;
 
   return (
+    <div>
+      {modsController.timestampsEnabled && uiState.playerStore.currentTrackUri !== '' ? (
+        <div className={styles.timestampContainer}>
+          <div className={styles.timestampInnerContainer}>
+            <div>{uiState.trackPlayedTime}</div>
+            <div>{uiState.trackLeftTime}</div>
+          </div>
+        </div>
+      ) : null}
     <div
       className={styles.scrubbingBar}
       style={{
@@ -22,6 +31,7 @@ const ScrubbingBar = () => {
           transform: `scaleX(${uiState.trackPlayedPercent * 8})`,
         }}
       />
+    </div>
     </div>
   );
 };

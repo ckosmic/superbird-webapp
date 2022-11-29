@@ -20,6 +20,22 @@ $container-height: -4px;
   height: 100%;
 }
 
+.timestampContainer {
+  position: absolute;
+  transform: translate(0%, -38px);
+  width: 100%;
+}
+
+.timestampInnerContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin:auto;
+  font-size: 20pt;
+  font-weight: bold;
+  color: rgb(255 255 255 / 50%);
+}
+
 .rainbow {
   background: linear-gradient(125deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
   background-size: 400% 400%;
