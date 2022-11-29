@@ -35,10 +35,10 @@ class TimerStore {
     this.speed = speed;
   }
 
-  start(interval = 1000) {
+  start(interval = 1000/40) {
     // TODO: replace timer calculation with one that doesn't drift over time.
     this.maxTimeMs = this.rootStore.playerStore.currentTrackDuration;
-    const intervalTimer = interval || 1000;
+    const intervalTimer = interval || 1000/40;
 
     if (this.status === TimerStatus.STOPPED) {
       this.status = TimerStatus.RUNNING;
