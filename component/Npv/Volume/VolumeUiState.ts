@@ -49,7 +49,7 @@ export default class VolumeUiState {
       this.playerStore.playing &&
       this.volumeStore.displayVolume === 0 &&
       !this.sessionStateStore.carMode;
-    return alwaysShowVolume || !!this.volumeTimeoutId;
+    return !!this.volumeTimeoutId;
   }
 
   get carMode() {
