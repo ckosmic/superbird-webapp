@@ -25,13 +25,20 @@ export const DEFAULT_REMOTE_CONFIG = {
   graphql_for_shelf_enabled: false,
 };
 
+export const OVERRIDE_REMOTE_CONFIG = {
+  developer_menu_enabled: true,
+  use_superbird_namespace: false,
+  graphql_endpoint_enabled: false,
+  graphql_for_shelf_enabled: false,
+};
+
 export type RemoteConfig = typeof DEFAULT_REMOTE_CONFIG;
 
 class RemoteConfigStore {
   rootStore: RootStore;
   middlewareActions: MiddlewareActions;
 
-  remoteConfig: RemoteConfig = { ...DEFAULT_REMOTE_CONFIG };
+  remoteConfig: RemoteConfig = { ...DEFAULT_REMOTE_CONFIG, ...OVERRIDE_REMOTE_CONFIG };
   messageReceived: boolean = false;
 
   constructor(
@@ -52,7 +59,7 @@ class RemoteConfigStore {
   onMiddlewareEvent(msg: RemoteConfigEventMessage) {
     switch (msg.type) {
       case 'remote_configuration_update':
-        Object.assign(this.remoteConfig, msg.payload ?? {});
+        Object.assign(this.remoteConfig, { ...(msg.payload ?? {}), ...OVERRIDE_REMOTE_CONFIG });
         this.messageReceived = true;
         break;
       default:

@@ -1,5 +1,5 @@
 import { reaction, makeAutoObservable, computed } from 'mobx';
-import InterappActions from 'middleware/InterappActions';
+import InterappActions, { RepeatMode } from 'middleware/InterappActions';
 import { RootStore } from './RootStore';
 import Socket from '../Socket';
 import { ContextItem } from 'component/Tracklist/TracklistUiState';
@@ -343,7 +343,6 @@ class PlayerStore {
     return this.currentTrack.uri !== '';
   }
   get useSuperbirdEndpoints(): boolean {
-    return false; // Compatibility with new versions of the Spotify app
     return this.rootStore.remoteConfigStore.useSuperbirdNamespace;
   }
 
@@ -504,6 +503,16 @@ class PlayerStore {
       this.seek(seekToPosition);
     } else if (this.canSeek) {
       this.seek(this.currentTrack.duration_ms);
+    }
+  }
+
+  setRepeat(repeatMode: RepeatMode) {
+    const repeatInteger = repeatMode === 'NONE' ? 0 : repeatMode === 'TRACK' ? 1 : 2;
+    this.state.playback_options.repeat = repeatInteger;
+    if (this.useSuperbirdEndpoints) {
+      this.interappActions.setRepeat(repeatMode);
+    } else {
+      this.interappActions._setRepeat(repeatInteger);
     }
   }
 

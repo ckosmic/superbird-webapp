@@ -22,7 +22,7 @@ import {
   getTipsOnDemandQuery,
 } from 'middleware/Queries';
 
-type RepeatMode = 'TRACK' | 'CONTEXT' | 'NONE';
+export type RepeatMode = 'TRACK' | 'CONTEXT' | 'NONE';
 
 export const InterappMethods = {
   CrashReport: 'com.spotify.superbird.crashes.report',
@@ -56,6 +56,7 @@ export const InterappMethods = {
   GetTrackElapsed: 'com.spotify.get_track_elapsed',
   GetTts: 'com.spotify.superbird.tts.speak',
   Graph: 'com.spotify.superbird.graphql',
+  _Graph: 'com.spotify.graphql',
   LogMessage: 'com.spotify.log_message',
   PitstopLog: 'com.spotify.superbird.pitstop.log',
   _PlayItem: 'com.spotify.play_item',
@@ -73,6 +74,7 @@ export const InterappMethods = {
   _SetShuffle: 'com.spotify.set_shuffle',
   _SkipNext: 'com.spotify.skip_next',
   _SkipPrevious: 'com.spotify.skip_previous',
+  SetOptions: "com.spotify.set_options",
   SkipToIndex: 'com.spotify.skip_to_index_in_queue',
   StartRadio: 'com.spotify.start_radio',
   RequestLog: 'com.spotify.superbird.instrumentation.request',
@@ -200,6 +202,13 @@ class InterappActions {
   setRepeat(repeatMode: RepeatMode) {
     return this.doRequest(InterappMethods.SetRepeat, {
       repeat_mode: repeatMode,
+    });
+  }
+
+  // Non-superbird version of setRepeat
+  _setRepeat(repeatMode: number) {
+    return this.doRequest(InterappMethods._SetRepeat, {
+      repeat: repeatMode
     });
   }
 

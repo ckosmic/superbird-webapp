@@ -153,6 +153,10 @@ export default class ControlButtonsUiState {
     return !this.playingInfoUiState.isMicMuted;
   }
 
+  get repeatState() {
+    return this.playerStore.onRepeat ? 1 : this.playerStore.onRepeatOnce ? 2 : 0;
+  }
+
   handlePlayClick = () => {
     if (this.playerStore.isPlayingSpotify) {
       this.npvUbiLogger.logPlayButtonClicked(this.playerStore.currentTrackUri);
@@ -193,6 +197,18 @@ export default class ControlButtonsUiState {
     }
     this.playerStore.skipPrev();
     this.swipeHandler.setSwipeDirection(SwipeDirection.RIGHT);
+  };
+
+  handleRepeatClick = () => {
+    this.playerStore.setRepeat("CONTEXT");
+  };
+
+  handleRepeatContextClick = () => {
+    this.playerStore.setRepeat("TRACK");
+  };
+
+  handleRepeatTrackClick = () => {
+    this.playerStore.setRepeat("NONE");
   };
 
   handleSkipNextClick = () => {
