@@ -25,5 +25,10 @@ export default defineConfig({
         targets: ['Chrome 69']
       }),
       react()
-  ]
+  ],
+  server: {
+    watch: {
+      usePolling: true
+    }
+  }
 });
