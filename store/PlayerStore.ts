@@ -343,6 +343,7 @@ class PlayerStore {
     return this.currentTrack.uri !== '';
   }
   get useSuperbirdEndpoints(): boolean {
+    return false; // Compatibility with new versions of the Spotify app
     return this.rootStore.remoteConfigStore.useSuperbirdNamespace;
   }
 
