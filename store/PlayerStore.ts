@@ -536,7 +536,7 @@ class PlayerStore {
     if (this.state.is_paused) {
       timerStore.stop();
     } else {
-      timerStore.start(1000);
+      timerStore.start(1000/30);
     }
     this.resetCurrentlySeeking();
   }
