@@ -160,25 +160,27 @@ export default class ControlButtonsUiState {
   handlePlayClick = () => {
     if (this.playerStore.isPlayingSpotify) {
       this.npvUbiLogger.logPlayButtonClicked(this.playerStore.currentTrackUri);
+      this.playerStore.play();
     } else {
       this.otherMediaUbiLogger.logPlayButtonClicked(
         this.playerStore.currentTrackUri,
       );
+      this.playerStore.play(true);
     }
     this.playerStore.setPlaying(true);
-    this.playerStore.play();
   };
 
   handlePauseClick = () => {
     if (this.playerStore.isPlayingSpotify) {
       this.npvUbiLogger.logPauseButtonClicked(this.playerStore.currentTrackUri);
+      this.playerStore.pause();
     } else {
       this.otherMediaUbiLogger.logPauseButtonClicked(
         this.playerStore.currentTrackUri,
       );
+      this.playerStore.pause(true);
     }
     this.playerStore.setPlaying(false);
-    this.playerStore.pause();
   };
 
   handleSkipPrevClick = () => {
@@ -188,14 +190,15 @@ export default class ControlButtonsUiState {
         this.timerStore.time,
         this.playerStore.currentTrackDuration,
       );
+      this.playerStore.skipPrev();
     } else {
       this.otherMediaUbiLogger.logSkipPrevClicked(
         this.playerStore.currentTrackUri,
         this.timerStore.time,
         this.playerStore.currentTrackDuration,
       );
+      this.playerStore.skipPrev(true);
     }
-    this.playerStore.skipPrev();
     this.swipeHandler.setSwipeDirection(SwipeDirection.RIGHT);
   };
 
@@ -218,14 +221,15 @@ export default class ControlButtonsUiState {
         this.timerStore.time,
         this.playerStore.currentTrackDuration,
       );
+      this.playerStore.skipNext();
     } else {
       this.otherMediaUbiLogger.logSkipNextClicked(
         this.playerStore.currentTrackUri,
         this.timerStore.time,
         this.playerStore.currentTrackDuration,
       );
+      this.playerStore.skipNext(true);
     }
-    this.playerStore.skipNext();
     this.swipeHandler.setSwipeDirection(SwipeDirection.LEFT);
   };
 

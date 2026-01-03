@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Clock.module.scss';
+import { useStore } from 'context/store';
 
 type Props = {
   offsetMinutes?: number;
@@ -8,6 +9,8 @@ type Props = {
 const Clock = ({
   offsetMinutes = 0,
 }: Props) => {
+
+  const { playerStore } = useStore(); 
 
   const [time, setTime] = useState(new Date());
 
@@ -66,7 +69,9 @@ const Clock = ({
 
   return (
     <div className={styles.container} data-testid="clock">
-      {formatTimeWithOffset(time, offsetMinutes)}
+      <div className={playerStore.isPlayingSpotify ? styles.clockText : styles.clockTextOtherMedia}>
+        {formatTimeWithOffset(time, offsetMinutes)}
+      </div>
     </div>
   );
 };

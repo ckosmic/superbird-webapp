@@ -4,10 +4,11 @@
   margin-top: 20px;
   width: 720px;
   height: 224px;
-  background-color: $gray-20;
+  background: $opacity-black-30;
   border-radius: 16px;
   display: flex;
   overflow: hidden;
+  box-shadow: 0 16px 32px rgb(0 0 0 / 20%);
 }
 
 .artwork {

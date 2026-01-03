@@ -349,8 +349,8 @@ class PlayerStore {
   /**
    * Player actions
    */
-  play() {
-    if (this.useSuperbirdEndpoints) {
+  play(useSystemEndpoint: boolean = false) {
+    if (this.useSuperbirdEndpoints || useSystemEndpoint) {
       this.interappActions.resume();
     } else {
       this.interappActions._setPlaybackSpeed(1);
@@ -393,17 +393,17 @@ class PlayerStore {
     this.interappActions.playPodcastTrailer(showUri);
   }
 
-  pause() {
-    if (this.useSuperbirdEndpoints) {
+  pause(useSystemEndpoint: boolean = false) {
+    if (this.useSuperbirdEndpoints || useSystemEndpoint) {
       this.interappActions.pause();
     } else {
       this.interappActions._setPlaybackSpeed(0);
     }
   }
 
-  skipPrev() {
+  skipPrev(useSystemEndpoint: boolean = false) {
     if (this.canSkipPrev) {
-      if (this.useSuperbirdEndpoints) {
+      if (this.useSuperbirdEndpoints || useSystemEndpoint) {
         this.interappActions.skipPrevious(true);
       } else {
         this.interappActions._skipPrevious();
@@ -421,13 +421,13 @@ class PlayerStore {
     }
   }
 
-  skipNext() {
+  skipNext(useSystemEndpoint: boolean = false) {
     if (this.canSkipNext) {
       const nextTrack = this.rootStore.queueStore.nextItem;
       if (nextTrack && this.isPlayingSpotify) {
         this.setCurrentQueueItem(nextTrack);
       }
-      if (this.useSuperbirdEndpoints) {
+      if (this.useSuperbirdEndpoints || useSystemEndpoint) {
         this.interappActions.skipNext();
       } else {
         this.interappActions._skipNext();

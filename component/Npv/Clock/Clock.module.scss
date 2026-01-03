@@ -8,8 +8,18 @@
   justify-content: center;
   align-items: center;
   padding-right: 40px;
+  padding-top: 8px;
+}
+
+.clockText {
   font-size: 28px;
+  font-weight: bolder;
+  opacity: 0.5;
+}
+
+.clockTextOtherMedia {
+  font-size: 44px;
+  font-weight: bolder;
   opacity: 0.5;
   padding-top: 8px;
-  font-weight: bolder;
 }

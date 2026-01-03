@@ -36,16 +36,14 @@ const Npv = () => {
 
   return (
     <>
-      {playerStore.isPlayingSpotify && (
-        <AmbientBackdrop
-          imageId={queueStore.current.image_uri}
-          getBackgroundStyleAttribute={getBackgroundColorFromChannels}
-        />
-      )}
+      <AmbientBackdrop
+        imageId={queueStore.current.image_uri}
+        getBackgroundStyleAttribute={getBackgroundColorFromChannels}
+      />
       <div className={styles.npv} data-testid="npv-container">
         {playerStore.isPlayingSpotify ? <PlayingInfoOrTip /> : <OtherMedia />}
-        {playerStore.isPlayingSpotify && <Scrubbing />}
-        <div className={styles.controlsContainer}>
+        <Scrubbing />
+        <div className={styles.controlsContainer + (playerStore.isPlayingSpotify ? '' : ' ' + styles.controlsContainerOtherMedia)}>
           <CSSTransition
             in={true}
             timeout={transitionDurationMs}
