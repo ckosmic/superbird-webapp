@@ -1,0 +1,15 @@
+@import 'style/variables.module';
+
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 40px;
+  font-size: 28px;
+  opacity: 0.5;
+  padding-top: 8px;
+  font-weight: bolder;
+}

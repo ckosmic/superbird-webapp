@@ -14,6 +14,7 @@ import { transitionDurationMs } from 'style/Variables';
 import styles from './Npv.module.scss';
 import OtherMedia from 'component/Npv/OtherMedia/OtherMedia';
 import NoNetworkBanner from 'component/Npv/NoNetworkBanner/NoNetworkBanner';
+import Clock from 'component/Npv/Clock/Clock';
 
 const transitionStyles = {
   enter: styles.enter,
@@ -62,6 +63,7 @@ const Npv = () => {
             <Volume />
           </CSSTransition>
         </div>
+        <Clock offsetMinutes={-480} />
         <WindAlertBanner />
         <NoNetworkBanner />
         <ScrubbingBackdrop />

@@ -30,6 +30,7 @@ export const OVERRIDE_REMOTE_CONFIG = {
   use_superbird_namespace: false,
   graphql_endpoint_enabled: false,
   graphql_for_shelf_enabled: false,
+  use_volume_superbird_namespace: false,
 };
 
 export type RemoteConfig = typeof DEFAULT_REMOTE_CONFIG;
