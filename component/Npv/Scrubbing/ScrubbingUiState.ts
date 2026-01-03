@@ -69,7 +69,7 @@ export default class ScrubbingUiState {
   stopScrubbing = () => {
     this.isScrubbing = false;
     if (this.playerStore.playing) {
-      this.timerStore.start();
+      this.timerStore.start(1000/30);
     }
     window.clearTimeout(this.scrubbingTimeoutId);
   };

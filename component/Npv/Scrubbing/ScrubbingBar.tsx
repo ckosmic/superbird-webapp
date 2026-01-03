@@ -7,19 +7,31 @@ const ScrubbingBar = () => {
   const { colorChannels } = uiState;
 
   return (
-    <div
-      className={styles.scrubbingBar}
-      style={{
-        backgroundColor: `rgb(${colorChannels.join(',')})`,
-      }}
-      data-testid="scrubbing-bar"
-    >
+    <div>
       <div
-        className={styles.progressPlayed}
+        className={styles.time}
         style={{
-          transform: `scaleX(${uiState.trackPlayedPercent * 8})`,
+          display: 'flex',
+          justifyContent: 'space-between',
         }}
-      />
+      >
+        <div>{uiState.trackPlayedTime}</div>
+        <div>{uiState.trackLeftTime}</div>
+      </div>
+      <div
+        className={styles.scrubbingBar}
+        style={{
+          backgroundColor: `rgb(${colorChannels.join(',')})`,
+        }}
+        data-testid="scrubbing-bar"
+      >
+        <div
+          className={styles.progressPlayed}
+          style={{
+            transform: `scaleX(${uiState.trackPlayedPercent * 8})`,
+          }}
+        />
+      </div>
     </div>
   );
 };
