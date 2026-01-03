@@ -96,6 +96,8 @@ export const InterappMethods = {
   Pause: 'com.spotify.superbird.pause',
   SetShuffle: 'com.spotify.superbird.set_shuffle',
   SetRepeat: 'com.spotify.superbird.set_repeat',
+
+  GetRecommendedRootItems: 'com.spotify.get_recommended_root_items',
 };
 
 export const INTERAPP_METHODS = Object.values(InterappMethods);
@@ -367,15 +369,41 @@ class InterappActions {
     );
   }
 
-  getHome(
-    limit: number,
-    overrides: HomeOverridesRequest,
-  ): Promise<HomeResponsePayload> {
+  // spotify:home, spotify:recently-played, spotify:browse, spotify:collection
+  getRecommendedRootItems(type: string): Promise<any> {
     return this.doRequest(
-      InterappMethods.GetHome,
-      { limit, limit_overrides: overrides },
+      InterappMethods.GetRecommendedRootItems,
+      {
+        type,
+      },
       false,
     );
+  }
+
+  async getHome(
+    limit: number,
+    overrides: HomeOverridesRequest,
+  ): Promise<any> {
+    return Promise.all([
+      this.doRequest(
+        InterappMethods.GetChildrenOfItem,
+        {
+          limit,
+          parent_id: "spotify:recently-played",
+          offset: 0,
+        },
+        false,
+      ),
+      this.doRequest(
+        InterappMethods.GetChildrenOfItem,
+        {
+          limit,
+          parent_id: "spotify:playlists",
+          offset: 0,
+        },
+        false,
+      ),
+    ]);
   }
 
   queryHome(

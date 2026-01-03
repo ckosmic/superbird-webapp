@@ -45,6 +45,7 @@ export type HomeChildItem = {
 
 export type HomeResponsePayload = {
   items: HomeItem[];
+  total: number;
 };
 
 export type GraphHomeResponsePayload = {
@@ -121,12 +122,31 @@ class HomeItemsStore {
     let toReturn: GetHomeResponse = { result: [], success: false };
     try {
       this.loading = true;
-      const response = await this.interappActions.getHome(
+      const responses = await this.interappActions.getHome(
         FIRST_PAGE_SIZE,
         limitOverrides,
       );
-      if (response.items) {
-        toReturn = { result: response.items, success: true };
+      if (responses) {
+        toReturn = { result: [
+          {
+            title: "Home",
+            uri: "featured",
+            children: responses[0].items,
+            total: responses[0].total,
+          },
+          {
+            title: "Voice",
+            uri: "voice",
+            children: [],
+            total: 0,
+          },
+          {
+            title: "Your Library",
+            uri: "your-library",
+            children: responses[1].items,
+            total: responses[1].total,
+          }
+        ], success: true };
       }
     } catch (e: any) {
       this.rootStore.errorHandler.logUnexpectedError(e, 'fetch home failed');
