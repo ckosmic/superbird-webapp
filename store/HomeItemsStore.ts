@@ -3,8 +3,10 @@ import InterappActions from 'middleware/InterappActions';
 import { makeAutoObservable, runInAction } from 'mobx';
 import {
   FIRST_PAGE_SIZE,
+  HOME_IDENTIFIER,
   MoreParams,
   ShelfCategoryItem,
+  YOUR_LIBRARY,
 } from './ShelfStore';
 import { tryActionNTimes } from 'helpers/Retry';
 import { getNextLimit, shouldFetchMore } from 'helpers/Pagination';
@@ -130,7 +132,7 @@ class HomeItemsStore {
         toReturn = { result: [
           {
             title: "Home",
-            uri: "featured",
+            uri: HOME_IDENTIFIER,
             children: responses[0].items,
             total: responses[0].total,
           },
@@ -142,7 +144,7 @@ class HomeItemsStore {
           },*/
           {
             title: "Your Library",
-            uri: "your-library",
+            uri: YOUR_LIBRARY,
             children: responses[1].items,
             total: responses[1].total,
           }
