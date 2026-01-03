@@ -134,12 +134,12 @@ class HomeItemsStore {
             children: responses[0].items,
             total: responses[0].total,
           },
-          {
+          /*{
             title: "Voice",
             uri: "voice",
             children: [],
             total: 0,
-          },
+          },*/
           {
             title: "Your Library",
             uri: "your-library",

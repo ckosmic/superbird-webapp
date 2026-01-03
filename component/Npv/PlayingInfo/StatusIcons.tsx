@@ -28,11 +28,11 @@ const StatusIcons = () => {
           <IconRepeatOne32 />
         </div>
       )*/}
-      {uiState.isMicMuted && (
+      {/*uiState.isMicMuted && (
         <div data-testid="muted-icon" onClick={uiState.showSettings}>
           <IconMute32 />
         </div>
-      )}
+      )*/}
     </div>
   );
 };
