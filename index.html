@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <link rel="preload" as="image" href="images/appstart.png">
+    <link rel="preload" as="image" href="images/appstart2.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=800,height=480,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="HandheldFriendly" content="true" />
@@ -12,7 +12,12 @@
 
 <body style="background-color:#282828">
     <div id="root" onmousedown="event.preventDefault?event.preventDefault():event.returnValue=!1"
-        oncontextmenu="return!1"><img width="800" height="480" src="images/appstart.png" alt="appstart" /></div>
+        oncontextmenu="return!1">
+        <img width="800" height="480" src="images/appstart2.png" alt="appstart" />
+        <!--<div style="position:absolute; top: 0; left: 0; width: 800px; height: 480px; z-index: 100; color: white; display: flex ; justify-content: center; align-items: center; font-size: 32px; font-family: Arial, sans-serif;">
+            <div style="padding-top:150px;">HELLO!!!</div>
+        </div>-->
+    </div>
     <script type="module" src="/index.tsx"></script>
 </body>
 
